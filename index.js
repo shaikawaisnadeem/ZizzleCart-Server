@@ -3,8 +3,11 @@ import Run from './Config/db.js';
 import signUpRoute from './Auth-SignUp/singup.js';
 import loginRoute from './Auth-Login/login.js';
 import Signup from './Controller-Signup/SignSchema.js';
+import cors from 'cors';
 
 const app = express();
+
+app.use(cors())
 app.use(express.json());
 await Run();
 app.use('/api', signUpRoute);
