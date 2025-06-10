@@ -2,6 +2,7 @@ import express from 'express';
 import Run from './Config/db.js';
 import signUpRoute from './Auth-SignUp/singup.js';
 import loginRoute from './Auth-Login/login.js';
+import Signup from './Controller-Signup/SignSchema.js';
 
 const app = express();
 app.use(express.json());
@@ -9,9 +10,9 @@ await Run();
 app.use('/api', signUpRoute);
 app.use('/api', loginRoute);
 
-router.get('/users', async (req, res) => {
+app.get('/users', async (req, res) => {
     try {
-        const users = await Signup.find();  
+        const users = await Signup.find({});  
         res.json(users);
     } catch (err) {
         res.status(500).json({ message: 'Error fetching users', error: err });
