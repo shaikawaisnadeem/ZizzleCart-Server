@@ -9,9 +9,14 @@ await Run();
 app.use('/api', signUpRoute);
 app.use('/api', loginRoute);
 
-app.get('/api/newuser', (req,res)=>{
-    res.send('hello world')
-})
+router.get('/users', async (req, res) => {
+    try {
+        const users = await Signup.find();  
+        res.json(users);
+    } catch (err) {
+        res.status(500).json({ message: 'Error fetching users', error: err });
+    }
+});
 
 app.listen(3000, () => {
     console.log(`Server is running on port http://localhost:3000`);
